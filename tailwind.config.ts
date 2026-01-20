@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'system-ui', 'sans-serif'],
+        mono: ['Roboto Mono', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,6 +51,42 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        panel: {
+          DEFAULT: "hsl(var(--panel-bg))",
+          border: "hsl(var(--panel-border))",
+          header: "hsl(var(--panel-header))",
+          "header-fg": "hsl(var(--panel-header-fg))",
+        },
+        key: {
+          DEFAULT: "hsl(var(--key-bg))",
+          border: "hsl(var(--key-border))",
+          shadow: "hsl(var(--key-shadow))",
+          active: "hsl(var(--key-active))",
+          "active-fg": "hsl(var(--key-active-fg))",
+          error: "hsl(var(--key-error))",
+          "error-fg": "hsl(var(--key-error-fg))",
+          next: "hsl(var(--key-next))",
+        },
+        finger: {
+          "pinky-left": "hsl(var(--finger-pinky-left))",
+          "ring-left": "hsl(var(--finger-ring-left))",
+          "middle-left": "hsl(var(--finger-middle-left))",
+          "index-left": "hsl(var(--finger-index-left))",
+          thumb: "hsl(var(--finger-thumb))",
+          "index-right": "hsl(var(--finger-index-right))",
+          "middle-right": "hsl(var(--finger-middle-right))",
+          "ring-right": "hsl(var(--finger-ring-right))",
+          "pinky-right": "hsl(var(--finger-pinky-right))",
+        },
+        progress: {
+          bar: "hsl(var(--progress-bar))",
+          bg: "hsl(var(--progress-bg))",
+        },
+        hand: {
+          bg: "hsl(var(--hand-bg))",
+          outline: "hsl(var(--hand-outline))",
+          highlight: "hsl(var(--finger-highlight))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,20 +105,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
