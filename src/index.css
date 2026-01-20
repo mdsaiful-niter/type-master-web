@@ -2,87 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Classic educational software colors */
+    --background: 40 33% 94%;
+    --foreground: 220 20% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 20% 97%;
+    --card-foreground: 220 20% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 20% 97%;
+    --popover-foreground: 220 20% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 210 70% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 40 15% 88%;
+    --secondary-foreground: 220 20% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 40 10% 90%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 160 50% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 40 15% 75%;
+    --input: 40 15% 85%;
+    --ring: 210 70% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
+
+    /* Typing Master specific colors */
+    --panel-bg: 40 20% 95%;
+    --panel-border: 40 15% 70%;
+    --panel-header: 210 40% 35%;
+    --panel-header-fg: 0 0% 100%;
+
+    /* Keyboard colors */
+    --key-bg: 40 20% 97%;
+    --key-border: 40 15% 65%;
+    --key-shadow: 40 15% 50%;
+    
+    /* Finger zone colors (pastel) */
+    --finger-pinky-left: 280 60% 85%;
+    --finger-ring-left: 200 60% 85%;
+    --finger-middle-left: 120 50% 85%;
+    --finger-index-left: 45 70% 85%;
+    --finger-thumb: 0 0% 92%;
+    --finger-index-right: 45 70% 85%;
+    --finger-middle-right: 120 50% 85%;
+    --finger-ring-right: 200 60% 85%;
+    --finger-pinky-right: 280 60% 85%;
+
+    /* Active states */
+    --key-active: 160 70% 45%;
+    --key-active-fg: 0 0% 100%;
+    --key-error: 0 70% 55%;
+    --key-error-fg: 0 0% 100%;
+    --key-next: 50 100% 60%;
+
+    /* Progress colors */
+    --progress-bar: 160 60% 50%;
+    --progress-bg: 40 15% 85%;
+
+    /* Hand diagram */
+    --hand-bg: 30 30% 95%;
+    --hand-outline: 30 20% 60%;
+    --finger-highlight: 160 70% 50%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 220 20% 15%;
+    --foreground: 40 20% 95%;
+    --card: 220 20% 18%;
+    --card-foreground: 40 20% 95%;
+    --popover: 220 20% 18%;
+    --popover-foreground: 40 20% 95%;
+    --primary: 210 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 40 20% 90%;
+    --muted: 220 15% 22%;
+    --muted-foreground: 40 10% 65%;
+    --accent: 160 50% 50%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 220 15% 30%;
+    --input: 220 15% 25%;
+    --ring: 210 70% 55%;
+    --panel-bg: 220 20% 20%;
+    --panel-border: 220 15% 35%;
+    --panel-header: 210 50% 45%;
+    --key-bg: 220 20% 25%;
+    --key-border: 220 15% 40%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +127,193 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Roboto', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'Roboto Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Classic panel styling */
+  .tm-panel {
+    @apply bg-card border-2 rounded shadow-md;
+    border-color: hsl(var(--panel-border));
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.5), 
+                0 2px 4px hsl(var(--panel-border) / 0.3);
+  }
+
+  .tm-panel-header {
+    @apply px-4 py-2 font-semibold text-sm;
+    background: linear-gradient(to bottom, 
+      hsl(var(--panel-header)), 
+      hsl(var(--panel-header) / 0.85));
+    color: hsl(var(--panel-header-fg));
+  }
+
+  /* Classic button styling */
+  .tm-button {
+    @apply px-6 py-2 font-medium rounded border-2 transition-all;
+    background: linear-gradient(to bottom, 
+      hsl(var(--secondary)), 
+      hsl(var(--secondary) / 0.85));
+    border-color: hsl(var(--panel-border));
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.5),
+                0 2px 4px hsl(0 0% 0% / 0.1);
+  }
+
+  .tm-button:hover {
+    background: linear-gradient(to bottom, 
+      hsl(var(--secondary) / 0.95), 
+      hsl(var(--secondary) / 0.75));
+  }
+
+  .tm-button:active {
+    box-shadow: inset 0 2px 4px hsl(0 0% 0% / 0.15);
+  }
+
+  .tm-button-primary {
+    background: linear-gradient(to bottom, 
+      hsl(var(--primary)), 
+      hsl(var(--primary) / 0.85));
+    color: hsl(var(--primary-foreground));
+    border-color: hsl(var(--primary) / 0.7);
+  }
+
+  .tm-button-primary:hover {
+    background: linear-gradient(to bottom, 
+      hsl(var(--primary) / 0.95), 
+      hsl(var(--primary) / 0.75));
+  }
+
+  /* Keyboard key styling */
+  .tm-key {
+    @apply flex items-center justify-center font-mono text-sm font-medium rounded;
+    background: linear-gradient(to bottom, 
+      hsl(var(--key-bg)), 
+      hsl(var(--key-bg) / 0.9));
+    border: 2px solid hsl(var(--key-border));
+    box-shadow: 0 3px 0 hsl(var(--key-shadow)),
+                inset 0 1px 0 hsl(0 0% 100% / 0.5);
+    transition: all 0.1s ease;
+  }
+
+  .tm-key:active,
+  .tm-key.pressed {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 hsl(var(--key-shadow)),
+                inset 0 1px 0 hsl(0 0% 100% / 0.5);
+  }
+
+  .tm-key.active {
+    background: linear-gradient(to bottom, 
+      hsl(var(--key-active)), 
+      hsl(var(--key-active) / 0.85));
+    color: hsl(var(--key-active-fg));
+    border-color: hsl(var(--key-active) / 0.7);
+  }
+
+  .tm-key.next {
+    background: linear-gradient(to bottom, 
+      hsl(var(--key-next)), 
+      hsl(var(--key-next) / 0.85));
+    animation: pulse-key 1s ease-in-out infinite;
+  }
+
+  .tm-key.error {
+    background: linear-gradient(to bottom, 
+      hsl(var(--key-error)), 
+      hsl(var(--key-error) / 0.85));
+    color: hsl(var(--key-error-fg));
+    border-color: hsl(var(--key-error) / 0.7);
+    animation: shake 0.3s ease;
+  }
+
+  /* Finger zone colors */
+  .tm-key.finger-pinky-left { background: hsl(var(--finger-pinky-left)); }
+  .tm-key.finger-ring-left { background: hsl(var(--finger-ring-left)); }
+  .tm-key.finger-middle-left { background: hsl(var(--finger-middle-left)); }
+  .tm-key.finger-index-left { background: hsl(var(--finger-index-left)); }
+  .tm-key.finger-thumb { background: hsl(var(--finger-thumb)); }
+  .tm-key.finger-index-right { background: hsl(var(--finger-index-right)); }
+  .tm-key.finger-middle-right { background: hsl(var(--finger-middle-right)); }
+  .tm-key.finger-ring-right { background: hsl(var(--finger-ring-right)); }
+  .tm-key.finger-pinky-right { background: hsl(var(--finger-pinky-right)); }
+
+  /* Progress bar */
+  .tm-progress-bar {
+    @apply h-full rounded-sm transition-all duration-300;
+    background: linear-gradient(to right, 
+      hsl(var(--progress-bar)), 
+      hsl(var(--progress-bar) / 0.8));
+  }
+
+  .tm-progress-track {
+    @apply w-full rounded-sm;
+    background: hsl(var(--progress-bg));
+    border: 1px solid hsl(var(--panel-border));
+  }
+
+  /* Menu item styling */
+  .tm-menu-item {
+    @apply flex items-center gap-4 p-4 rounded cursor-pointer transition-all;
+    background: linear-gradient(to bottom, 
+      hsl(var(--card)), 
+      hsl(var(--card) / 0.95));
+    border: 2px solid hsl(var(--panel-border));
+    box-shadow: 0 2px 4px hsl(0 0% 0% / 0.08);
+  }
+
+  .tm-menu-item:hover {
+    background: linear-gradient(to bottom, 
+      hsl(var(--secondary)), 
+      hsl(var(--secondary) / 0.9));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px hsl(0 0% 0% / 0.12);
+  }
+
+  /* Lesson card */
+  .tm-lesson-card {
+    @apply p-4 rounded cursor-pointer transition-all;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--panel-border));
+  }
+
+  .tm-lesson-card:hover {
+    background: hsl(var(--secondary));
+    border-color: hsl(var(--primary));
+  }
+
+  .tm-lesson-card.completed {
+    border-left: 4px solid hsl(var(--accent));
+  }
+
+  .tm-lesson-card.active {
+    background: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  @keyframes pulse-key {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  @keyframes typing-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .typing-cursor {
+    animation: typing-cursor 1s ease-in-out infinite;
   }
 }
