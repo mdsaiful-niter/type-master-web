@@ -31,29 +31,20 @@ const rightHandFingers: FingerPath[] = [
 const HandDiagram: React.FC<HandDiagramProps> = ({ hand, activeFinger }) => {
   const fingers = hand === 'left' ? leftHandFingers : rightHandFingers;
   
-  const isFingerActive = (finger: FingerType) => {
-    return activeFinger === finger;
-  };
+  const isFingerActive = (finger: FingerType) => activeFinger === finger;
 
   return (
     <div className="tm-panel p-3">
-      <div className="tm-panel-header -mx-3 -mt-3 mb-3 rounded-t text-xs">
+      <div className="tm-panel-header -mx-3 -mt-3 mb-3 rounded-t-xl text-[10px]">
         {hand === 'left' ? 'Left Hand' : 'Right Hand'}
       </div>
       
-      <svg
-        viewBox="0 0 120 100"
-        className="w-full h-auto"
-        style={{ maxWidth: '180px' }}
-      >
+      <svg viewBox="0 0 120 100" className="w-full h-auto" style={{ maxWidth: '180px' }}>
         {/* Palm */}
         <ellipse
-          cx="60"
-          cy="90"
-          rx="45"
-          ry="20"
+          cx="60" cy="90" rx="45" ry="20"
           className="fill-hand-bg stroke-hand-outline"
-          strokeWidth="1.5"
+          strokeWidth="1"
         />
         
         {/* Fingers */}
@@ -62,16 +53,19 @@ const HandDiagram: React.FC<HandDiagramProps> = ({ hand, activeFinger }) => {
             key={fingerData.finger}
             d={fingerData.path}
             className={cn(
-              'stroke-hand-outline transition-colors duration-200',
+              'stroke-hand-outline transition-all duration-300',
               isFingerActive(fingerData.finger)
                 ? 'fill-hand-highlight'
                 : 'fill-hand-bg'
             )}
-            strokeWidth="1.5"
+            strokeWidth="1"
+            style={isFingerActive(fingerData.finger) ? {
+              filter: 'drop-shadow(0 0 6px hsl(38 85% 55% / 0.4))'
+            } : undefined}
           />
         ))}
         
-        {/* Finger labels when active */}
+        {/* Active dot */}
         {activeFinger && fingers.map((fingerData) => (
           isFingerActive(fingerData.finger) && (
             <circle
@@ -89,7 +83,7 @@ const HandDiagram: React.FC<HandDiagramProps> = ({ hand, activeFinger }) => {
                   : 15)
               }
               cy="55"
-              r="4"
+              r="3.5"
               className="fill-primary animate-pulse"
             />
           )

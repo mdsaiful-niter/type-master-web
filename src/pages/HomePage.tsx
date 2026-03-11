@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTypingStore } from '@/lib/typingStore';
 import AppHeader from '@/components/AppHeader';
+import { motion } from 'framer-motion';
 
 const HomePage: React.FC = () => {
   const { getProgress } = useTypingStore();
@@ -13,30 +14,39 @@ const HomePage: React.FC = () => {
       title: 'Start Course',
       description: 'Learn touch typing with structured lessons',
       path: '/courses',
-      color: 'bg-blue-100',
     },
     {
       icon: '⌨️',
       title: 'Typing Practice',
       description: 'Free practice with words, sentences, and paragraphs',
       path: '/practice',
-      color: 'bg-green-100',
     },
     {
       icon: '📊',
       title: 'Progress & Reports',
       description: 'View your typing statistics and history',
       path: '/progress',
-      color: 'bg-amber-100',
     },
     {
       icon: '⚙️',
       title: 'Settings',
       description: 'Customize your learning experience',
       path: '/settings',
-      color: 'bg-purple-100',
     },
   ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -44,76 +54,96 @@ const HomePage: React.FC = () => {
       
       <main className="flex-1 p-8">
         <div className="max-w-4xl mx-auto">
-          {/* Welcome Section */}
-          <div className="tm-panel p-8 mb-8 text-center">
-            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-5xl">⌨️</span>
-            </div>
-            <h2 className="text-3xl font-bold mb-2">Welcome to Typing Master</h2>
-            <p className="text-muted-foreground text-lg mb-4">
-              Learn to type faster and more accurately with our comprehensive typing course
-            </p>
+          {/* Hero Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="tm-panel p-10 mb-10 text-center relative overflow-hidden"
+          >
+            {/* Decorative gradient orb */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-20 blur-3xl" 
+                 style={{ background: 'radial-gradient(circle, hsl(38 85% 55%), transparent)' }} />
             
-            {progress.percentage > 0 && (
-              <div className="max-w-md mx-auto">
-                <div className="flex justify-between text-sm mb-2">
-                  <span>Course Progress</span>
-                  <span>{progress.completed} of {progress.total} lessons completed</span>
-                </div>
-                <div className="tm-progress-track h-4">
-                  <div
-                    className="tm-progress-bar"
-                    style={{ width: `${progress.percentage}%` }}
-                  />
-                </div>
+            <div className="relative z-10">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                <span className="text-4xl">⌨️</span>
               </div>
-            )}
-          </div>
+              <h2 className="text-4xl font-bold mb-3 text-gradient-gold">Typing Master</h2>
+              <p className="text-muted-foreground text-lg mb-6 max-w-md mx-auto">
+                Master the art of touch typing with precision and speed
+              </p>
+              
+              {progress.percentage > 0 && (
+                <div className="max-w-sm mx-auto">
+                  <div className="flex justify-between text-sm mb-2 text-muted-foreground">
+                    <span>Course Progress</span>
+                    <span className="text-primary font-medium">{progress.completed} / {progress.total}</span>
+                  </div>
+                  <div className="tm-progress-track h-3">
+                    <div
+                      className="tm-progress-bar"
+                      style={{ width: `${progress.percentage}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
           
           {/* Menu Grid */}
-          <div className="grid grid-cols-2 gap-6">
-            {menuItems.map((item) => (
-              <Link key={item.path} to={item.path}>
-                <div className="tm-menu-item h-full">
-                  <div className={`w-16 h-16 rounded-lg ${item.color} flex items-center justify-center text-3xl`}>
-                    {item.icon}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-2 gap-5"
+          >
+            {menuItems.map((menuItem) => (
+              <motion.div key={menuItem.path} variants={item}>
+                <Link to={menuItem.path}>
+                  <div className="tm-menu-item h-full group">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-2xl border border-primary/10 group-hover:border-primary/30 transition-colors">
+                      {menuItem.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-base font-semibold mb-1">{menuItem.title}</h3>
+                      <p className="text-sm text-muted-foreground">{menuItem.description}</p>
+                    </div>
+                    <span className="text-xl text-muted-foreground group-hover:text-primary transition-colors">→</span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.description}</p>
-                  </div>
-                  <span className="text-2xl text-muted-foreground">→</span>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           
-          {/* Tips Section */}
-          <div className="tm-panel mt-8 p-6">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <span>💡</span> Typing Tips
+          {/* Tips */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="tm-panel mt-10 p-6"
+          >
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-primary">
+              <span>💡</span> Quick Tips
             </h3>
             <div className="grid grid-cols-3 gap-4 text-sm">
-              <div className="p-3 bg-muted rounded">
-                <strong>Posture</strong>
-                <p className="text-muted-foreground mt-1">Sit up straight with feet flat on the floor</p>
-              </div>
-              <div className="p-3 bg-muted rounded">
-                <strong>Home Row</strong>
-                <p className="text-muted-foreground mt-1">Keep fingers on ASDF and JKL; keys</p>
-              </div>
-              <div className="p-3 bg-muted rounded">
-                <strong>Practice</strong>
-                <p className="text-muted-foreground mt-1">15-30 minutes daily brings best results</p>
-              </div>
+              {[
+                { title: 'Posture', desc: 'Sit up straight with feet flat on the floor' },
+                { title: 'Home Row', desc: 'Keep fingers on ASDF and JKL; keys' },
+                { title: 'Practice', desc: '15-30 minutes daily brings best results' },
+              ].map((tip) => (
+                <div key={tip.title} className="p-4 bg-muted/50 rounded-lg border border-border">
+                  <strong className="text-foreground">{tip.title}</strong>
+                  <p className="text-muted-foreground mt-1">{tip.desc}</p>
+                </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </main>
       
-      {/* Footer */}
-      <footer className="tm-panel rounded-none p-4 text-center text-sm text-muted-foreground">
-        Typing Master Web Edition • Learn to type like a pro
+      <footer className="border-t border-border p-4 text-center text-sm text-muted-foreground">
+        Typing Master Web Edition • Master your keyboard
       </footer>
     </div>
   );
