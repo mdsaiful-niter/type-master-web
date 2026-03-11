@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 interface TypingAreaProps {
   text: string;
@@ -15,15 +16,19 @@ const TypingArea: React.FC<TypingAreaProps> = ({
   lessonKeys = [],
 }) => {
   return (
-    <div className="tm-panel">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="tm-panel"
+    >
       {lessonKeys.length > 0 && (
-        <div className="tm-panel-header rounded-t flex items-center gap-2">
-          <span>Lesson Keys:</span>
-          <div className="flex gap-2">
+        <div className="tm-panel-header rounded-t-xl flex items-center gap-3">
+          <span className="text-muted-foreground text-xs">Focus Keys</span>
+          <div className="flex gap-1.5">
             {lessonKeys.map((key, idx) => (
               <span
                 key={idx}
-                className="px-2 py-0.5 bg-white/20 rounded text-sm font-mono"
+                className="px-2.5 py-0.5 bg-primary/15 border border-primary/20 rounded-md text-xs font-mono text-primary"
               >
                 {key === ' ' ? 'Space' : key.toUpperCase()}
               </span>
@@ -33,7 +38,7 @@ const TypingArea: React.FC<TypingAreaProps> = ({
       )}
       
       <div className="p-6">
-        <div className="font-mono text-xl leading-relaxed tracking-wide bg-card rounded-lg p-6 border-2 border-panel-border shadow-inner">
+        <div className="font-mono text-lg leading-loose tracking-wide bg-muted/30 rounded-lg p-6 border border-border">
           {text.split('').map((char, idx) => {
             const isTyped = idx < currentIndex;
             const isCurrent = idx === currentIndex;
@@ -44,10 +49,10 @@ const TypingArea: React.FC<TypingAreaProps> = ({
               <span
                 key={idx}
                 className={cn(
-                  'transition-colors duration-100',
+                  'transition-colors duration-100 rounded-sm',
                   isCorrect && 'text-accent',
-                  isIncorrect && 'text-destructive bg-destructive/20',
-                  isCurrent && 'bg-key-next text-foreground typing-cursor border-b-2 border-primary',
+                  isIncorrect && 'text-destructive bg-destructive/15',
+                  isCurrent && 'bg-primary/20 text-primary typing-cursor border-b-2 border-primary',
                   !isTyped && !isCurrent && 'text-muted-foreground'
                 )}
               >
@@ -57,13 +62,13 @@ const TypingArea: React.FC<TypingAreaProps> = ({
           })}
         </div>
         
-        {/* Progress indicator */}
+        {/* Progress */}
         <div className="mt-4">
-          <div className="flex justify-between text-sm text-muted-foreground mb-1">
-            <span>Progress</span>
-            <span>{Math.round((currentIndex / text.length) * 100)}%</span>
+          <div className="flex justify-between text-xs text-muted-foreground mb-1.5">
+            <span className="uppercase tracking-wider">Progress</span>
+            <span className="text-primary font-medium">{Math.round((currentIndex / text.length) * 100)}%</span>
           </div>
-          <div className="tm-progress-track h-3">
+          <div className="tm-progress-track h-2">
             <div
               className="tm-progress-bar"
               style={{ width: `${(currentIndex / text.length) * 100}%` }}
@@ -71,7 +76,7 @@ const TypingArea: React.FC<TypingAreaProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

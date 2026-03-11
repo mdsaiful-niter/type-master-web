@@ -17,28 +17,31 @@ const AppHeader: React.FC = () => {
   ];
 
   return (
-    <header className="tm-panel border-b-2 rounded-none">
-      <div className="flex items-center justify-between px-6 py-3">
+    <header className="border-b border-border backdrop-blur-xl sticky top-0 z-50"
+            style={{ background: 'hsl(225 20% 7% / 0.85)' }}>
+      <div className="flex items-center justify-between px-6 py-3 max-w-7xl mx-auto">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-xl">TM</span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-9 h-9 rounded-lg bg-primary/15 border border-primary/20 flex items-center justify-center group-hover:border-primary/40 transition-colors">
+            <span className="text-primary font-bold text-sm">TM</span>
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground">Typing Master</h1>
-            <p className="text-xs text-muted-foreground">Web Edition</p>
+            <h1 className="text-base font-bold text-gradient-gold">Typing Master</h1>
+            <p className="text-[10px] text-muted-foreground tracking-widest uppercase">Web Edition</p>
           </div>
         </Link>
         
         {/* Navigation */}
-        <nav className="flex items-center gap-1">
+        <nav className="flex items-center gap-1 bg-muted/50 rounded-lg p-1 border border-border">
           {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
               className={cn(
-                'tm-button text-sm',
-                location.pathname === item.path && 'tm-button-primary'
+                'px-4 py-1.5 text-sm rounded-md transition-all duration-200 font-medium',
+                location.pathname === item.path
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
               )}
             >
               {item.label}
@@ -46,13 +49,13 @@ const AppHeader: React.FC = () => {
           ))}
         </nav>
         
-        {/* Progress indicator */}
+        {/* Progress */}
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <div className="text-xs text-muted-foreground">Overall Progress</div>
-            <div className="text-sm font-medium">{progress.completed}/{progress.total} lessons</div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Progress</div>
+            <div className="text-sm font-semibold text-primary">{progress.completed}/{progress.total}</div>
           </div>
-          <div className="w-24 tm-progress-track h-4">
+          <div className="w-20 tm-progress-track h-2">
             <div
               className="tm-progress-bar"
               style={{ width: `${progress.percentage}%` }}
